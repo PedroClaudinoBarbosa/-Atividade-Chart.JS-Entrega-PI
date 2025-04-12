@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard com Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1,
+        h2 {
+            margin-top: 40px;
+        }
+
+        canvas {
+            max-width: 700px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        footer {
+            margin-top: 60px;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dashboard de Temperatura e Umidade</h1>
+
+    <h2>Gráfico de Linhas</h2>
+    <canvas id="lineChart"></canvas>
+
+    <h2>Gráfico de Barras</h2>
+    <canvas id="barChart"></canvas>
+
+    <p>Desenvolvido por Pedro Claudino Barbosa</p>
+</body>
+
+</html>
+<script>
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'],
+            datasets: [
+                {
+                    label: 'Temperatura (°C)',
+                    data: [30, 29, 28, 25, 26, 23],
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    tension: 0.4
+                },
+                {
+                    label: 'Umidade (%)',
+                    data: [80, 82, 80, 85, 80, 83],
+                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Temperatura e Umidade por Horário'
+                }
+            }
+        }
+    });
+
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+            datasets: [
+                {
+                    label: 'Temperatura Média (°C)',
+                    data: [22, 24, 27, 23, 20, 18],
+                    backgroundColor: 'rgb(255, 159, 64)'
+                },
+                {
+                    label: 'Umidade Média (%)',
+                    data: [90, 89, 93, 87, 88, 82],
+                    backgroundColor: 'rgb(75, 192, 192)'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Temperatura e Umidade Média por Mês'
+                }
+            }
+        }
+    });
+</script>
